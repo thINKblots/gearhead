@@ -1,0 +1,43 @@
+# Gearhead Small Model Configuration
+# ~125M parameters - suitable for edge deployment
+
+# Model architecture
+hidden_size: 384
+num_layers: 6
+num_heads: 6
+intermediate_size: 1536
+max_seq_length: 1024
+
+# Data
+train_data: "data/processed/train.jsonl"
+val_data: "data/processed/val.jsonl"
+tokenizer: "tokenizer/tokenizer.json"
+
+# Training hyperparameters
+batch_size: 16
+learning_rate: 5e-4
+num_epochs: 20
+warmup_steps: 500
+gradient_accumulation_steps: 2
+weight_decay: 0.01
+max_grad_norm: 1.0
+
+# Optimization
+adam_beta1: 0.9
+adam_beta2: 0.95
+adam_epsilon: 1e-8
+
+# Checkpointing
+output_dir: "./outputs/small_model"
+save_steps: 500
+eval_steps: 250
+logging_steps: 50
+save_total_limit: 3
+
+# Mixed precision (recommended for faster training)
+fp16: true
+
+# Weights & Biases logging (optional)
+wandb: false
+wandb_project: "gearhead"
+wandb_run_name: "small-model-v1"

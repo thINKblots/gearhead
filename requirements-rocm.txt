@@ -1,0 +1,30 @@
+# Requirements for training with AMD GPUs using ROCm
+#
+# Installation instructions:
+# 1. Install ROCm from https://rocm.docs.amd.com/en/latest/deploy/linux/quick_start.html
+# 2. Install PyTorch with ROCm support:
+#    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm6.0
+# 3. Install remaining requirements:
+#    pip install -r requirements-rocm.txt
+
+# Core dependencies (same as base requirements)
+transformers>=4.30.0
+tokenizers>=0.13.0
+numpy>=1.24.0
+pandas>=2.0.0
+tqdm>=4.65.0
+pyyaml>=6.0
+wandb>=0.15.0
+sentencepiece>=0.1.99
+datasets>=2.12.0
+accelerate>=0.20.0
+safetensors>=0.3.1
+scikit-learn>=1.3.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+pytest>=7.4.0
+black>=23.0.0
+flake8>=6.0.0
+
+# Note: PyTorch with ROCm must be installed separately as shown above
+# Do NOT install torch from PyPI when using ROCm

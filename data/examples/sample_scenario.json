@@ -1,0 +1,15 @@
+{
+  "equipment": "Caterpillar 320 Excavator",
+  "symptom": "Engine starts but loses power under heavy load. Black smoke from exhaust.",
+  "error_codes": ["P0087", "SPN 157"],
+  "diagnostic_steps": [
+    "Check fuel pressure at common rail (should be 280-320 bar)",
+    "Inspect primary and secondary fuel filters for contamination",
+    "Test fuel pump output pressure and flow rate",
+    "Check for air in fuel system using clear return line",
+    "Inspect fuel injectors for proper operation",
+    "Verify turbocharger boost pressure"
+  ],
+  "probable_cause": "Low fuel pressure due to contaminated fuel filter restricting flow. This causes incomplete combustion under load, resulting in power loss and black smoke.",
+  "solution": "Replace both primary and secondary fuel filters. Bleed the fuel system to remove any air. Verify fuel pressure meets specification (280-320 bar at rated speed). If problem persists after filter replacement, test fuel pump output and inspect for worn injectors. Check fuel quality and drain water separator if equipped."
+}
