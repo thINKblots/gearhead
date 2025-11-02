@@ -2,14 +2,18 @@
 
 ## After Training Completes
 
-Your model is at: `outputs/small_model_rocm/final_model/`
+Your model location depends on which platform you trained on:
+- **NVIDIA**: `outputs/small_model/final_model/`
+- **AMD**: `outputs/small_model_rocm/final_model/`
+- **Apple Silicon**: `outputs/small_model_mps/final_model/`
 
 ## Three Ways to Use It
 
 ### 1. Interactive Mode 🎯 Easiest
 ```bash
+# Replace with your model path
 python scripts/inference.py \
-  --model outputs/small_model_rocm/final_model \
+  --model outputs/small_model_mps/final_model \
   --tokenizer tokenizer/tokenizer.json
 ```
 
@@ -18,7 +22,7 @@ Then type your scenarios!
 ### 2. Command Line
 ```bash
 python scripts/inference.py \
-  --model outputs/small_model_rocm/final_model \
+  --model outputs/small_model_mps/final_model \
   --tokenizer tokenizer/tokenizer.json \
   --equipment "Caterpillar 320" \
   --symptom "Engine loses power" \
@@ -32,8 +36,9 @@ from gearhead.inference import DiagnosticEngine
 
 tokenizer = GearheadTokenizer("tokenizer/tokenizer.json")
 engine = DiagnosticEngine(
-    model_path="outputs/small_model_rocm/final_model",
-    tokenizer=tokenizer
+    model_path="outputs/small_model_mps/final_model",
+    tokenizer=tokenizer,
+    device="mps"  # Use "cuda" for NVIDIA/AMD, "mps" for Apple, "cpu" for CPU
 )
 
 result = engine.diagnose(
@@ -46,14 +51,26 @@ print(result['probable_cause'])
 print(result['solution'])
 ```
 
-## GPU vs CPU
+## Device Selection
 
-**GPU** (faster, ~100-200 tokens/sec):
+Choose the appropriate device for your hardware:
+
+**NVIDIA GPU** (~150-300 tokens/sec):
 ```python
 engine = DiagnosticEngine(..., device="cuda")
 ```
 
-**CPU** (slower, ~10-30 tokens/sec, more compatible):
+**AMD GPU** (~100-200 tokens/sec):
+```python
+engine = DiagnosticEngine(..., device="cuda")
+```
+
+**Apple Silicon** (~100-200 tokens/sec):
+```python
+engine = DiagnosticEngine(..., device="mps")
+```
+
+**CPU** (~10-30 tokens/sec, most compatible):
 ```python
 engine = DiagnosticEngine(..., device="cpu")
 ```

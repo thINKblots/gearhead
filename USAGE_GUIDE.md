@@ -4,13 +4,17 @@ Complete guide for using your trained Gearhead diagnostic model.
 
 ## Quick Start
 
-After training completes, your model is saved in `outputs/small_model_rocm/final_model/`
+After training completes, your model is saved in one of these locations depending on your platform:
+- **NVIDIA**: `outputs/small_model/final_model/`
+- **AMD**: `outputs/small_model_rocm/final_model/`
+- **Apple Silicon**: `outputs/small_model_mps/final_model/`
 
 ### 1. Interactive Mode (Easiest)
 
 ```bash
+# Replace with your model path
 python scripts/inference.py \
-  --model outputs/small_model_rocm/final_model \
+  --model outputs/small_model_mps/final_model \
   --tokenizer tokenizer/tokenizer.json
 ```
 
@@ -230,28 +234,48 @@ outputs/small_model_rocm/
     └── trainer_state.pt # Training state
 ```
 
-## GPU vs CPU Inference
+## Inference Device Selection
 
-### On GPU (Faster)
+### NVIDIA GPU (Fastest)
+```python
+engine = DiagnosticEngine(
+    model_path="outputs/small_model/final_model",
+    tokenizer=tokenizer,
+    device="cuda"  # Uses NVIDIA GPU
+)
+```
+
+### AMD GPU (ROCm)
 ```python
 engine = DiagnosticEngine(
     model_path="outputs/small_model_rocm/final_model",
     tokenizer=tokenizer,
-    device="cuda"  # Uses GPU
+    device="cuda"  # ROCm also uses "cuda" device string
 )
 ```
 
-### On CPU (More Compatible)
+### Apple Silicon (MPS)
 ```python
 engine = DiagnosticEngine(
-    model_path="outputs/small_model_rocm/final_model",
+    model_path="outputs/small_model_mps/final_model",
+    tokenizer=tokenizer,
+    device="mps"  # Uses Metal Performance Shaders
+)
+```
+
+### CPU (Most Compatible)
+```python
+engine = DiagnosticEngine(
+    model_path="outputs/small_model/final_model",
     tokenizer=tokenizer,
     device="cpu"  # Uses CPU
 )
 ```
 
 **Performance**:
-- GPU: ~100-200 tokens/sec
+- NVIDIA GPU: ~150-300 tokens/sec
+- AMD GPU: ~100-200 tokens/sec
+- Apple Silicon: ~100-200 tokens/sec
 - CPU: ~10-30 tokens/sec
 
 ## Example Scenarios

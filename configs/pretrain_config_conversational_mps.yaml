@@ -1,0 +1,47 @@
+# Pre-training configuration for conversational instructional dataset
+# Optimized for Apple Silicon (MPS)
+
+# Model architecture
+vocab_size: 912  # Matches trained tokenizer
+hidden_size: 768  # 125M parameter model
+num_layers: 12
+num_attention_heads: 12
+intermediate_size: 3072
+max_position_embeddings: 512
+
+# Pre-training settings
+task: "language_modeling"  # Causal language modeling
+train_data: "data/processed/conversational_instructional_20MB.jsonl"
+
+# Training hyperparameters
+batch_size: 4  # Optimized for unified memory
+gradient_accumulation_steps: 8  # Effective batch size: 32
+learning_rate: 5.0e-5  # Standard for pre-training
+weight_decay: 0.01
+max_grad_norm: 1.0
+
+# Optimization
+num_epochs: 3  # 3 passes through 63K examples = ~189K training steps
+warmup_steps: 1000
+lr_scheduler: "linear_with_warmup"
+
+# Memory optimization
+fp16: false  # MPS doesn't fully support FP16 mixed precision yet
+gradient_checkpointing: true
+max_seq_length: 512
+
+# Logging and checkpointing
+logging_steps: 100
+eval_steps: 2000
+save_steps: 5000
+output_dir: "outputs/pretrained_conversational_mps"
+
+# Device
+device: "mps"  # Apple Silicon Metal Performance Shaders
+
+# Data loading
+num_workers: 4
+shuffle: true
+
+# Tokenizer
+tokenizer: "tokenizer/tokenizer.json"
