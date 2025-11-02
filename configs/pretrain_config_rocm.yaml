@@ -1,0 +1,44 @@
+# Pre-training configuration for ROCm (AMD GPUs)
+# Optimized for language model pre-training on equipment diagnostic corpus
+
+# Model architecture
+vocab_size: 32000
+hidden_size: 768  # 125M parameter model
+num_layers: 12
+num_attention_heads: 12
+intermediate_size: 3072
+max_position_embeddings: 512
+
+# Pre-training settings
+task: "language_modeling"  # Standard LM pre-training
+mlm_probability: 0.15  # Not used for causal LM
+
+# Training hyperparameters
+batch_size: 2  # Small for 12GB VRAM
+gradient_accumulation_steps: 16  # Effective batch size: 32
+learning_rate: 5.0e-5  # Standard for pre-training
+weight_decay: 0.01
+max_grad_norm: 1.0
+
+# Optimization
+num_epochs: 3  # 3 passes through corpus
+warmup_steps: 500
+lr_scheduler: "linear_with_warmup"
+
+# Memory optimization
+fp16: true  # Mixed precision training
+gradient_checkpointing: true
+max_seq_length: 512
+
+# Logging and checkpointing
+logging_steps: 100
+eval_steps: 1000
+save_steps: 5000
+output_dir: "outputs/pretrained_model_rocm"
+
+# Device
+device: "cuda"  # ROCm uses CUDA API
+
+# Data
+corpus_path: "data/text/mobile_equipment_diagnostics_corpus.txt"
+tokenizer_path: "tokenizer/tokenizer.json"

@@ -1,0 +1,77 @@
+Problem: Engine starts but loses power under load after 30 minutes
+Equipment: Caterpillar 320D Excavator
+Error Codes: P0087, SPN 157
+Cause: Fuel filter restriction causing low fuel pressure when warm
+Solution: Replace primary and secondary fuel filters. Bleed fuel system to remove air. Check fuel pressure meets specification (280-320 bar at operating temperature). Inspect fuel lines for restrictions.
+
+---
+
+Problem: Hydraulic system responds slowly, bucket curl weak under load
+Equipment: John Deere 644K Loader
+Error Codes: None
+Cause: Low hydraulic fluid or worn hydraulic pump with insufficient output pressure
+Solution: Check hydraulic fluid level and top up if needed. Test pump output pressure (should be 2500-2800 PSI). If pressure is low, rebuild or replace hydraulic pump. Replace hydraulic filter.
+
+---
+
+Problem: Transmission slipping in 3rd gear, especially when machine is cold
+Equipment: Komatsu PC200-8 Excavator
+Error Codes: P0735
+Cause: Worn clutch pack in 3rd gear assembly or low transmission fluid
+Solution: Check transmission fluid level and condition. If level is correct, perform pressure test on 3rd gear circuit. Inspect and replace 3rd gear clutch pack assembly if worn. Update transmission control software if TSB available.
+
+---
+
+Problem: Engine cranks but won't start, no smoke from exhaust
+Equipment: Volvo EC480D Excavator
+Error Codes: P0340, P0335
+Cause: Faulty crankshaft position sensor or camshaft position sensor preventing ECM from determining engine position
+Solution: Test crankshaft position sensor resistance (should be 500-1500 ohms). Test camshaft position sensor resistance. Replace sensor that is out of specification. Check sensor wiring for damage. Clear codes and verify engine starts.
+
+---
+
+Problem: Engine overheating after 45 minutes of operation
+Equipment: Case 580 Backhoe
+Error Codes: None
+Cause: Cooling system restriction or faulty thermostat
+Solution: Check coolant level and top up if needed. Inspect radiator for blockage or debris. Test thermostat operation (should open at 180-190°F). Check water pump for proper operation. Pressure test cooling system for leaks. Clean radiator fins if restricted.
+
+---
+
+Problem: Excessive black smoke from exhaust under load
+Equipment: Caterpillar 320D Excavator
+Error Codes: P0101, P0234
+Cause: Turbocharger boost pressure too high or air filter restriction
+Solution: Inspect air filter and replace if dirty. Test turbocharger boost pressure (should not exceed 2.5 bar). Check for intake air leaks. Inspect turbocharger wastegate operation. Test MAF sensor output.
+
+---
+
+Problem: Loader bucket drifts down when hydraulic control lever is in hold
+Equipment: John Deere 644K Loader
+Error Codes: None
+Cause: Internal leakage in bucket cylinder or faulty control valve spool seal
+Solution: Perform cylinder drift test to measure drift rate. If excessive (more than 2 inches in 5 minutes), inspect cylinder rod seals and piston seals. Test control valve for internal leakage. Replace cylinder seals or control valve as needed.
+
+---
+
+Problem: Starter motor cranks slowly or clicks but won't turn engine
+Equipment: Komatsu PC200-8 Excavator
+Error Codes: None
+Cause: Weak battery, corroded battery connections, or faulty starter motor
+Solution: Test battery voltage (should be 12.5-13.0V when engine off). Load test battery under cranking conditions. Clean and tighten battery terminals. Test voltage drop across starter connections. If starter is faulty, remove and rebuild or replace.
+
+---
+
+Problem: Hydraulic oil overheating (temperature exceeds 180°F)
+Equipment: Volvo EC480D Excavator
+Error Codes: HY001
+Cause: Hydraulic oil cooler restriction or main relief valve stuck partially open causing excessive bypass flow
+Solution: Check hydraulic oil temperature sensor calibration. Inspect oil cooler for blockage - clean fins if needed. Check coolant flow through oil cooler. Test main relief valve setting (should be 350 bar). Adjust or replace relief valve if out of specification.
+
+---
+
+Problem: Electrical system intermittently loses power, gauges go dark
+Equipment: Case 580 Backhoe
+Error Codes: None
+Cause: Loose or corroded main ground connection or failing alternator
+Solution: Inspect all main ground connections between battery, frame, and engine. Clean and tighten ground connections. Test alternator output (should be 13.8-14.5V at idle). Check battery cables for internal corrosion. Test main fuse panel connections.

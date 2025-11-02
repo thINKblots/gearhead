@@ -1,0 +1,44 @@
+# Extended Mobile Equipment Diagnostics - Fast Training
+# Optimized for 10,000 examples, ~45 minutes total
+
+# Model architecture - MEMORY OPTIMIZED for 12GB VRAM
+hidden_size: 256        # Reduced from 384
+num_layers: 4           # Reduced from 6
+num_heads: 4            # Reduced from 6
+intermediate_size: 1024 # Reduced from 1536
+max_seq_length: 256     # Reduced from 384 - fits most diagnostics
+
+# Data - Extended diagnostics dataset
+train_data: "data/processed/train.jsonl"
+val_data: "data/processed/val.jsonl"
+tokenizer: "tokenizer/tokenizer.json"
+
+# Training hyperparameters - MEMORY OPTIMIZED
+batch_size: 4           # Reduced from 8
+learning_rate: 5e-4     # Standard LR
+num_epochs: 5           # 5 epochs for 10K examples
+warmup_steps: 200
+gradient_accumulation_steps: 8  # Increased to keep effective batch = 32
+weight_decay: 0.01
+max_grad_norm: 1.0
+
+# Optimization
+adam_beta1: 0.9
+adam_beta2: 0.95
+adam_epsilon: 1e-8
+
+# Checkpointing
+output_dir: "./outputs/extended_diagnostics"
+save_steps: 500
+eval_steps: 200
+logging_steps: 50
+save_total_limit: 3
+
+# Mixed precision
+fp16: true
+
+# ROCm-specific
+use_rocm: true
+rocm_optimize: true
+
+wandb: false

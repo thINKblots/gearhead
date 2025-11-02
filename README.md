@@ -31,13 +31,24 @@ make install-rocm
 make install-mps
 ```
 
-### 2. Generate Sample Data
+### 2. Prepare Training Data
 
+**Option A - Sample Data** (for testing):
 ```bash
 make generate-data
 ```
 
-⚠️ Creates 1000 synthetic examples for testing. For production, you need real diagnostic data - see [DATA_REQUIREMENTS.md](DATA_REQUIREMENTS.md)
+**Option B - Your Custom .txt Files**:
+```bash
+make convert-txt TXT=your_diagnostics.txt OUT=data/processed/train.jsonl EQUIPMENT="Equipment Name"
+```
+
+**Option C - PDF Manuals** (see [PDF_TRAINING_GUIDE.md](PDF_TRAINING_GUIDE.md)):
+```bash
+python scripts/extract_from_pdf.py --pdf manual.pdf --output data.jsonl --review
+```
+
+⚠️ Sample data is synthetic. For production, use real diagnostic data - see [DATA_REQUIREMENTS.md](DATA_REQUIREMENTS.md) and [CUSTOM_TXT_TRAINING.md](CUSTOM_TXT_TRAINING.md)
 
 ### 3. Train Model
 
@@ -75,6 +86,7 @@ For a useful model, you need **1,000+ real diagnostic scenarios**.
 - **[PLATFORM_COMPARISON.md](PLATFORM_COMPARISON.md)** - Choose your platform ⭐
 - **[QUICKSTART.md](QUICKSTART.md)** - Quick start guide
 - **[DATA_REQUIREMENTS.md](DATA_REQUIREMENTS.md)** - How to get real data ⭐
+- **[CUSTOM_TXT_TRAINING.md](CUSTOM_TXT_TRAINING.md)** - Train with your custom .txt files ⭐
 - **[PDF_TRAINING_GUIDE.md](PDF_TRAINING_GUIDE.md)** - Extract training data from PDF manuals ⭐
 
 ### Platform-Specific

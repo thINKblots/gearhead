@@ -1,0 +1,44 @@
+# Gearhead ULTRA FAST Training Configuration
+# For quick testing and iteration - trains in ~30 minutes instead of 8 hours!
+
+# Model architecture - TINY for maximum speed
+hidden_size: 256
+num_layers: 4
+num_heads: 4
+intermediate_size: 1024
+max_seq_length: 256
+
+# Data - SUBSET for speed
+train_data: "data/processed/train_small.jsonl"  # Only 5000 examples
+val_data: "data/processed/val_small.jsonl"      # Only 500 examples
+tokenizer: "tokenizer/tokenizer.json"
+
+# Training hyperparameters - MAXIMUM SPEED
+batch_size: 16          # LARGE batch (still fits in 12GB with small model)
+learning_rate: 2e-3     # High LR for fast convergence
+num_epochs: 3           # Just 3 epochs
+warmup_steps: 50        # Minimal warmup
+gradient_accumulation_steps: 2  # Minimal accumulation (effective batch = 32)
+weight_decay: 0.01
+max_grad_norm: 1.0
+
+# Optimization
+adam_beta1: 0.9
+adam_beta2: 0.95
+adam_epsilon: 1e-8
+
+# Checkpointing - MINIMAL
+output_dir: "./outputs/small_model_rocm"
+save_steps: 5000        # Rarely save
+eval_steps: 500         # Eval every 500 steps
+logging_steps: 50
+save_total_limit: 1     # Only keep final checkpoint
+
+# Mixed precision
+fp16: true
+
+# ROCm-specific
+use_rocm: true
+rocm_optimize: true
+
+wandb: false

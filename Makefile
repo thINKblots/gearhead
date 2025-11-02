@@ -15,6 +15,9 @@ help:
 	@echo "  make train-small-mps   - Train small model on Apple Silicon"
 	@echo "  make train-medium     - Train medium model (350M params)"
 	@echo "  make generate-data     - Generate sample diagnostic data (1000 examples)"
+	@echo "  make convert-txt       - Convert custom .txt to JSONL (TXT=file.txt OUT=out.jsonl)"
+	@echo "  make pretrain-rocm     - Pre-train on equipment corpus (AMD GPU)"
+	@echo "  make pretrain          - Pre-train on equipment corpus (NVIDIA GPU)"
 	@echo "  make infer            - Run inference in interactive mode"
 	@echo "  make infer-example    - Run example diagnosis"
 	@echo "  make detect-gpu       - Detect available GPU and compute platform"
@@ -92,6 +95,16 @@ generate-data:
 	@echo "For production, you need real diagnostic data."
 	@echo "See DATA_REQUIREMENTS.md for details."
 
+convert-txt:
+	@if [ -z "$(TXT)" ] || [ -z "$(OUT)" ]; then \
+		echo "Usage: make convert-txt TXT=input.txt OUT=output.jsonl [EQUIPMENT='Equipment Name']"; \
+		echo ""; \
+		echo "Example:"; \
+		echo "  make convert-txt TXT=diagnostics.txt OUT=data/processed/train.jsonl EQUIPMENT='Cat 320D'"; \
+		exit 1; \
+	fi
+	@python scripts/convert_txt_to_jsonl.py "$(TXT)" "$(OUT)" "$(EQUIPMENT)"
+
 install-mps:
 	@echo "Installing dependencies for Apple Silicon (MPS)..."
 	pip install torch torchvision torchaudio
@@ -101,3 +114,12 @@ install-mps:
 train-small-mps:
 	@echo "Starting training with Apple Silicon (MPS) optimizations..."
 	python scripts/train.py --config configs/small_config_mps.yaml
+
+pretrain-rocm:
+	@echo "Pre-training model on equipment corpus with ROCm..."
+	@chmod +x scripts/pretrain_rocm.sh
+	./scripts/pretrain_rocm.sh --corpus data/text/mobile_equipment_diagnostics_corpus.txt --output outputs/pretrained_model_rocm --fp16 --device cuda
+
+pretrain:
+	@echo "Pre-training model on equipment corpus..."
+	source venv/bin/activate && python scripts/pretrain.py --corpus data/text/mobile_equipment_diagnostics_corpus.txt --output outputs/pretrained_model --fp16 --device cuda
